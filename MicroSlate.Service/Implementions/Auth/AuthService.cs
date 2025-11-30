@@ -1,0 +1,142 @@
+﻿using MicroSlate.Infrastructure.AppConct;
+using MicroSlate.Infrastructure.Identity;
+using MicroSlate.Service.Abstracts.Auth;
+using MicroSlate.Service.Abstracts.Email;
+using MicroSlate.Service.DTOs.Auth;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Routing;
+
+namespace MicroSlate.Service.Implementions.Auth
+{
+    public class AuthService : IAuthService
+    {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _applicationDBContext;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IJwtTokenGenerator _jwt;
+        private readonly IEmailsService _emailsService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        private readonly IUrlHelper _urlHelper;
+
+        public AuthService(ApplicationDbContext applicationDBContext, IUrlHelperFactory urlHelperFactory,
+             IEmailsService emailsService, IHttpContextAccessor httpContextAccessor,
+            UserManager<ApplicationUser> userManager,
+
+            SignInManager<ApplicationUser> signInManager,
+            IJwtTokenGenerator jwt)
+
+
+
+        {
+            var httpContext = httpContextAccessor.HttpContext;
+            _urlHelper = urlHelperFactory.GetUrlHelper(
+                new ActionContext(httpContext, httpContext.GetRouteData(), new Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor()));
+
+
+            _emailsService = emailsService;
+            _applicationDBContext = applicationDBContext;
+            _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
+            _signInManager = signInManager;
+
+            _jwt = jwt;
+        }
+
+        public async Task<string> Register(RegisterDTO registerDto)
+        {
+            var trans = await _applicationDBContext.Database.BeginTransactionAsync();
+            try
+            {
+                var user = new ApplicationUser
+                {
+                    FullName = registerDto.FullName,
+                    UserName = registerDto.UserName,
+                    Email = registerDto.Email
+                };
+                //if Email is Exist
+                var existUser = await _userManager.FindByEmailAsync(user.Email);
+                //email is Exist
+                if (existUser != null) return "EmailIsExist";
+
+                var userByUserName = await _userManager.FindByNameAsync(user.UserName);
+                //username is Exist
+                if (userByUserName != null) return "UserNameIsExist";
+
+                var result = await _userManager.CreateAsync(user, registerDto.Password);
+
+                if (!result.Succeeded)
+                    throw new Exception(string.Join(",", result.Errors.Select(e => e.Description)));
+
+                // Default Role
+                await _userManager.AddToRoleAsync(user, "User");
+
+
+                //Send Confirm Email
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+
+                var requestAccessor = _httpContextAccessor.HttpContext.Request;
+
+
+                var baseUrl = $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host}";
+
+                var returnUrl = requestAccessor.Scheme + "://" + requestAccessor.Host + _urlHelper.Action("ConfirmEmail", "Authentication", new { userId = user.Id, code = code });
+                var message = $"To Confirm Email Click Link: <a href='{returnUrl}'>Link Of Confirmation</a>";
+
+
+                //message or body
+                await _emailsService.SendEmail(user.Email, message, "ConFirm Email");
+
+                var roles = await _userManager.GetRolesAsync(user);
+
+
+
+                await trans.CommitAsync();
+                return "Success";
+
+            }
+            catch (Exception ex)
+            {
+                await trans.RollbackAsync();
+                return "Failed";
+            }
+
+        }
+
+        public async Task<string> Login(string email, string password)
+        {
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(email);
+                if (user == null)
+                    throw new Exception("Invalid email or password");
+
+                var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
+                if (!result.Succeeded)
+                    throw new Exception("Invalid email or password");
+
+                var roles = await _userManager.GetRolesAsync(user);
+
+                return _jwt.GenerateToken(user, roles);
+            }
+
+            catch (Exception ex)
+            {
+
+                return $"{ex.Message} not login";
+
+
+
+            }
+
+        }
+
+
+    }
+
+}
+
