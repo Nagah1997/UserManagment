@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MicroSlate.Application.Features.Auth.Command.login;
 using MicroSlate.Application.Features.Auth.Command.Register;
+using MicroSlate.Application.Features.Auth.Query.ConfirmEmail;
 using Microsoft.AspNetCore.Mvc;
 using LoginRequest = MicroSlate.Application.Features.Auth.Command.login.LoginRequest;
 using RegisterRequest = MicroSlate.Application.Features.Auth.Command.Register.RegisterRequest;
@@ -33,6 +34,18 @@ namespace MicroSlate.API.Controllers
             var token = await _mediator.Send(new LoginCommand() { Request = dto });
             return Ok(new { token });
         }
+
+
+        [HttpGet("ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail(LoginRequest dto)
+        {
+            var token = await _mediator.Send(new ConfirmEmailQuery() { Request = dto });
+            return Ok(new { token });
+        }
+
+
+
+
     }
 
 }

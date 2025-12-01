@@ -6,5 +6,6 @@ namespace MicroSlate.Service.Abstracts.Auth
     {
         Task<string> Register(RegisterDTO registerDto);
         Task<string> Login(string email, string password);
+        Task<string> ConfirmEmail(int? userId, string? code);
     }
 }

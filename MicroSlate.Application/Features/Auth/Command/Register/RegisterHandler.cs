@@ -11,9 +11,10 @@ namespace MicroSlate.Application.Features.Auth.Command.Register
     {
         private readonly IAuthService _auth;
         private readonly IStringLocalizer<SharedResources> _sharedResources;
-        public RegisterHandler(IAuthService auth)
+        public RegisterHandler(IAuthService auth, IStringLocalizer<SharedResources> sharedResources)
         {
             _auth = auth;
+            _sharedResources = sharedResources;
 
         }
         public async Task<Result<RegisterResponse>> Handle(RegisterCommand request, CancellationToken cancellationToken)
