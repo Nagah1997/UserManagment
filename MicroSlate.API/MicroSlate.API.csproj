@@ -5,10 +5,23 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+		<PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.71.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.72.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.18" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.18" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.18" />
+	
+		<PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+		<PackageReference Include="Serilog.Sinks.Elasticsearch" Version="10.0.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MicroSlate.Application\MicroSlate.Application.csproj" />

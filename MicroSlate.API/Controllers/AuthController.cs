@@ -37,7 +37,7 @@ namespace MicroSlate.API.Controllers
 
 
         [HttpGet("ConfirmEmail")]
-        public async Task<IActionResult> ConfirmEmail(LoginRequest dto)
+        public async Task<IActionResult> ConfirmEmail(ConfirmEmailRequest dto)
         {
             var token = await _mediator.Send(new ConfirmEmailQuery() { Request = dto });
             return Ok(new { token });

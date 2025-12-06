@@ -6,6 +6,8 @@ namespace MicroSlate.Infrastructure.Identity
     {
 
         public string FullName { get; set; }
+        //[Encrypted]
+        public string? Code { get; set; }
 
 
     }
