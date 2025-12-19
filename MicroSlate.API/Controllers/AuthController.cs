@@ -1,10 +1,10 @@
 ﻿using MediatR;
-using MicroSlate.Application.Features.Auth.Command.login;
-using MicroSlate.Application.Features.Auth.Command.Register;
-using MicroSlate.Application.Features.Auth.Query.ConfirmEmail;
+using MicroSlate.Application.Features.Auth.Command.Models.login;
+using MicroSlate.Application.Features.Auth.Command.Models.Register;
+using MicroSlate.Application.Features.Auth.Query.Models.ConfirmEmail;
 using Microsoft.AspNetCore.Mvc;
-using LoginRequest = MicroSlate.Application.Features.Auth.Command.login.LoginRequest;
-using RegisterRequest = MicroSlate.Application.Features.Auth.Command.Register.RegisterRequest;
+using LoginRequest = MicroSlate.Application.Features.Auth.Command.Models.login.LoginRequest;
+using RegisterRequest = MicroSlate.Application.Features.Auth.Command.Models.Register.RegisterRequest;
 
 namespace MicroSlate.API.Controllers
 {

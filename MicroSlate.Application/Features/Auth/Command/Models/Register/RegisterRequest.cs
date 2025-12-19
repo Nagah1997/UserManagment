@@ -1,6 +1,6 @@
 ﻿using MicroSlate.Service.DTOs.Auth;
 
-namespace MicroSlate.Application.Features.Auth.Command.Register
+namespace MicroSlate.Application.Features.Auth.Command.Models.Register
 {
     public class RegisterRequest
     {

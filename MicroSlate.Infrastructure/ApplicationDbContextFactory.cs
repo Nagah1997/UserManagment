@@ -7,6 +7,9 @@ namespace MicroSlate.Infrastructure
 {
     public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
+
+
+
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             // إشارة لمشروع API (startup)
@@ -22,7 +25,7 @@ namespace MicroSlate.Infrastructure
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
-            return new ApplicationDbContext(optionsBuilder.Options);
+            return new ApplicationDbContext(optionsBuilder.Options, configuration);
         }
     }
 }

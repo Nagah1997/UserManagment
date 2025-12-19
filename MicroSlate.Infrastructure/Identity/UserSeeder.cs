@@ -13,7 +13,7 @@ namespace MicroSlate.Infrastructure.Identity
                 var defaultUser = new ApplicationUser()
                 {
                     UserName = "admin",
-                    Email = "mahmoudfci57@gmail.com",
+                    Email = "mahmoud2fci57@gmail.com",
                     FullName = "MicroSlate",
 
                     PhoneNumber = "Mrn@gah57",

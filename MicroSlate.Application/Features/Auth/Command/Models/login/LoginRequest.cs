@@ -1,4 +1,4 @@
-﻿namespace MicroSlate.Application.Features.Auth.Command.login
+﻿namespace MicroSlate.Application.Features.Auth.Command.Models.login
 {
     public class LoginRequest
     {

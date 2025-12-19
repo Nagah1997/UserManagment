@@ -1,13 +1,13 @@
 ﻿using Ardalis.Result;
 
 using MediatR;
-using MicroSlate.Application.Features.Auth.Query.ConfirmEmail;
+using MicroSlate.Application.Features.Auth.Query.Models.ConfirmEmail;
 using MicroSlate.Application.Resources;
 using MicroSlate.Service.Abstracts.Auth;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Resources;
 
-namespace MicroSlate.Application.Features.Auth.Query
+namespace MicroSlate.Application.Features.Auth.Query.Handlers
 {
     public class ConfirmEmailQueryHandler : IRequestHandler<ConfirmEmailQuery, Result<ConfirmEmailResponse>>
     {

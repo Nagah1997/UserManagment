@@ -1,4 +1,4 @@
-﻿namespace MicroSlate.Application.Features.Auth.Query.ConfirmEmail
+﻿namespace MicroSlate.Application.Features.Auth.Query.Models.ConfirmEmail
 {
     public class ConfirmEmailResponse
     {

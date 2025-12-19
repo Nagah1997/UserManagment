@@ -16,4 +16,8 @@
     <PackageReference Include="MediatR" Version="13.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Auth\Validations\" />
+  </ItemGroup>
+
 </Project>

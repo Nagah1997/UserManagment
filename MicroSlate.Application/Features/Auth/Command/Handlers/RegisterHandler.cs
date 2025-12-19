@@ -1,11 +1,12 @@
 ﻿using Ardalis.Result;
 using MediatR;
+using MicroSlate.Application.Features.Auth.Command.Models.Register;
 using MicroSlate.Application.Resources;
 using MicroSlate.Service.Abstracts.Auth;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Resources;
 
-namespace MicroSlate.Application.Features.Auth.Command.Register
+namespace MicroSlate.Application.Features.Auth.Command.Handlers
 {
     public class RegisterHandler : IRequestHandler<RegisterCommand, Result<RegisterResponse>>
     {

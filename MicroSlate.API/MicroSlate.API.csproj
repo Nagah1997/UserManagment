@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MicroSlate.Application\MicroSlate.Application.csproj" />
+    <ProjectReference Include="..\MicroSlate.Service\MicroSlate.Service.csproj" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
   </ItemGroup>
 

@@ -1,9 +1,10 @@
 ﻿
 using Ardalis.Result;
 using MediatR;
+using MicroSlate.Application.Features.Auth.Command.Models.login;
 using MicroSlate.Service.Abstracts.Auth;
 
-namespace MicroSlate.Application.Features.Auth.Command.login
+namespace MicroSlate.Application.Features.Auth.Command.Handlers
 {
     public class loginHandler : IRequestHandler<LoginCommand, Result<LoginResponse>>
     {
