@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Authorization\Roles\Command\Handlers\" />
     <Folder Include="Features\Auth\Validations\" />
   </ItemGroup>
 

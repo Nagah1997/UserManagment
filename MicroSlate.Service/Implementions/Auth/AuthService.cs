@@ -144,10 +144,6 @@ namespace MicroSlate.Service.Implementions.Auth
                 return "ErrorWhenConfirmEmail";
             return "Success";
         }
-
-
-
-
         public async Task<string> SendResetPasswordCode(string Email)
         {
             var trans = await _applicationDBContext.Database.BeginTransactionAsync();
@@ -183,7 +179,6 @@ namespace MicroSlate.Service.Implementions.Auth
                 return "Failed";
             }
         }
-
         public async Task<string> ConfirmResetPassword(string Code, string Email)
         {
             //Get User
@@ -198,7 +193,6 @@ namespace MicroSlate.Service.Implementions.Auth
             if (userCode == Code) return "Success";
             return "Failed";
         }
-
         public async Task<string> ResetPassword(string Email, string Password)
         {
             var trans = await _applicationDBContext.Database.BeginTransactionAsync();
