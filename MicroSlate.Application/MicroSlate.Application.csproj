@@ -13,11 +13,11 @@
 
   <ItemGroup>
     <PackageReference Include="Ardalis.Result" Version="10.1.0" />
+    <PackageReference Include="AutoMapper" Version="16.0.0" />
     <PackageReference Include="MediatR" Version="13.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Authorization\Roles\Command\Handlers\" />
     <Folder Include="Features\Auth\Validations\" />
   </ItemGroup>
 

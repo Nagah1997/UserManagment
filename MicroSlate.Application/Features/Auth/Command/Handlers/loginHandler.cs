@@ -34,7 +34,6 @@ namespace MicroSlate.Application.Features.Auth.Command.Handlers
 
 
 
-
         }
     }
 
