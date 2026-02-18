@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace MicroSlate.Infrastructure.AppConct
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, Role, string>
     {
 
         private readonly AesCryptoProvider _provider;

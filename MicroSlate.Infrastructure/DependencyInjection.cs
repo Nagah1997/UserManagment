@@ -12,7 +12,7 @@ namespace MicroSlate.Infrastructure
         {
 
             // 🔹 Identity
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, Role>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

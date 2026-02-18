@@ -4,7 +4,7 @@ namespace MicroSlate.Infrastructure.Identity
 {
     public static class IdentitySeeder
     {
-        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager)
+        public static async Task SeedRoles(RoleManager<Role> roleManager)
         {
             string[] roles = new[] { "ADMIN", "USER" };
 
@@ -12,7 +12,7 @@ namespace MicroSlate.Infrastructure.Identity
             {
                 if (!await roleManager.RoleExistsAsync(role))
                 {
-                    await roleManager.CreateAsync(new IdentityRole(role));
+                    await roleManager.CreateAsync(new Role(role));
                 }
             }
         }

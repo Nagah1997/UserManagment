@@ -101,7 +101,7 @@ if (app.Environment.IsDevelopment())
 // Seed Roles
 using (var scope = app.Services.CreateScope())
 {
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
     await IdentitySeeder.SeedRoles(roleManager);
     await UserSeeder.SeedAsync(userManager);

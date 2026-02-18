@@ -39,6 +39,4 @@ namespace MicroSlate.API.Controllers
         }
     }
 
-
-
 }

@@ -17,7 +17,7 @@ namespace MicroSlate.API.Controllers
             _mediator = mediator;
         }
         [HttpGet()]
-        public async Task<GetRolesListResponse> get([FromForm] GetRolesListQuery command)
+        public async Task<GetRolesListResponse> get([FromQuery] GetRolesListQuery command)
         {
             var response = await _mediator.Send(command);
             return response;

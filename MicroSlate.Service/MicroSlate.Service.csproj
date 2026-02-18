@@ -15,8 +15,4 @@
     <ProjectReference Include="..\MicroSlate.Infrastructure\MicroSlate.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementions\Authentication\" />
-  </ItemGroup>
-
 </Project>
