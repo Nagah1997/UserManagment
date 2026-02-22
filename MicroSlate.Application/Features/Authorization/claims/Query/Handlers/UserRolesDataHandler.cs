@@ -15,7 +15,8 @@ using ManageUserRolesDTO = MicroSlate.Service.Implementions.Authorization.claims
 namespace MicroSlate.Application.Features.Authorization.claims.Query.Handlers
 {
     public class UserRolesDataHandler :
-        IRequestHandler<UserRolesDataQuery, Result<UserRolesDataResponse>>
+        IRequestHandler<UserRolesDataQuery, Result<UserRolesDataResponse>>,
+          IRequestHandler<ManageUserClaimsQuery, Result<ManageUserClaimsResponse>>
 
     {
         #region MyRegion
@@ -41,8 +42,8 @@ namespace MicroSlate.Application.Features.Authorization.claims.Query.Handlers
 
             var user = await _userManager.FindByIdAsync(request.UserId.ToString());
             var roles = await _claimsService.ManageUserRolesData(user);
-            var result = _mapper.Map<List<ManageUserRolesDTO>>(roles);
-            return Result.Success(new UserRolesDataResponse { Result = result });
+         //   var result = _mapper.Map<List<ManageUserRolesDTO>>(roles);
+            return Result.Success(new UserRolesDataResponse { Result = roles });
         }
         public async Task<Result<ManageUserClaimsResponse>> Handle(ManageUserClaimsQuery request, CancellationToken cancellationToken)
         {

@@ -2,6 +2,6 @@
 {
     public class UserRolesDataResponse
     {
-        public List<ManageUserRolesDTO> Result { get; set; }
+        public  ManageUserRolesDTO Result { get; set; }
     }
 }
