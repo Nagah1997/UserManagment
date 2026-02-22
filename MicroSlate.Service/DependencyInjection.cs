@@ -4,11 +4,13 @@ using MicroSlate.Service.Abstracts.Auth;
 using MicroSlate.Service.Abstracts.Authorization.claims;
 using MicroSlate.Service.Abstracts.Authorization.Roles;
 using MicroSlate.Service.Abstracts.Email;
+using MicroSlate.Service.Abstracts.Users;
 using MicroSlate.Service.Helper;
 using MicroSlate.Service.Implementions.Auth;
 using MicroSlate.Service.Implementions.Authorization.claims;
 using MicroSlate.Service.Implementions.Authorization.Roles;
 using MicroSlate.Service.Implementions.Email;
+using MicroSlate.Service.Implementions.Users;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,7 @@ namespace MicroSlate.Service
         public static IServiceCollection AddServicesLayer(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IEmailsService, EmailsService>();
             services.AddHttpContextAccessor();
             services.AddSingleton<IUrlHelperFactory, UrlHelperFactory>();
