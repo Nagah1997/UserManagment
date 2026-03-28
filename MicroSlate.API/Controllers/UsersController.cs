@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using MicroSlate.Application.Features.Authorization.Roles.Query.Models.GetAll;
 using MicroSlate.Application.Features.Users.Query.Models.GetAll;
+using MicroSlate.Application.Features.Users.Query.Models.GetOneUser;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MicroSlate.API.Controllers
@@ -14,11 +14,17 @@ namespace MicroSlate.API.Controllers
             _mediator = mediator;
         }
         [HttpGet("GetUsers")]
-        public async Task<GetUserResponse> get([FromQuery] GetUserQuery command)
+        public async Task<GetUserResponse> get([FromQuery] GetUserRequest request)
         {
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(new GetUserQuery(request));
             return response;
         }
-    
+        [HttpGet("GetUser")]
+        public async Task<GetOneUserResponse> GetUser([FromQuery] GetOneUserRequest request)
+        {
+            var response = await _mediator.Send(new GetOneUserQuery(request));
+            return response;
+        }
+
     }
 }

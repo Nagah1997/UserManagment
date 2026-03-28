@@ -1,6 +1,5 @@
 ﻿using MicroSlate.Infrastructure.AppConct;
 using MicroSlate.Infrastructure.Identity;
-using MicroSlate.Service.Abstracts.Auth;
 using MicroSlate.Service.Abstracts.Email;
 using MicroSlate.Service.Abstracts.Users;
 using MicroSlate.Service.DTOs.Users;
@@ -9,11 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MicroSlate.Service.Implementions.Users
 {
@@ -54,8 +48,8 @@ namespace MicroSlate.Service.Implementions.Users
 
         public async Task<List<GetAllUserDTO>> GetAllUsers()
         {
-            
-           var users = _userManager.Users.ToList();
+
+            var users = _userManager.Users.ToList();
             var usersDTO = new List<GetAllUserDTO>();
             foreach (var user in users)
             {
@@ -69,7 +63,32 @@ namespace MicroSlate.Service.Implementions.Users
                     Roles = userRoles.ToList()
                 });
             }
-            return  usersDTO;
+            return usersDTO;
+        }
+        public async Task<GetAllUserDTO> GetUser(Guid Id)
+        {
+
+            var user = await _userManager.FindByIdAsync(Id.ToString());
+            if (user == null)
+            {
+
+                return new GetAllUserDTO();
+
+
+            }
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var usersDTO = new GetAllUserDTO()
+            {
+
+                Id = user.Id,
+                FullName = user.FullName,
+                Email = user.Email ?? "",
+                UserName = user.UserName ?? "",
+                Roles = userRoles.ToList()
+
+            };
+
+            return usersDTO;
         }
     }
 }
